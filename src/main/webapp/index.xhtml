@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        <h:form id="personForm">
+            <h:outputLabel for="name" value="Nombre" />
+            <h:inputText id="name" value="#{personView.form.name}" />
+
+            <h:selectOneRadio value="#{personView.form.sex}">
+                <f:converter converterId="com.apuntesdejava.SexConverter" />
+                <f:selectItem itemLabel="Hombre" itemValue="MALE" />
+                <f:selectItem itemLabel="Mujer" itemValue="FEMALE" />
+            </h:selectOneRadio>
+            <br/>
+
+            <h:outputLabel for="email" value="Correo"/>
+            <h:inputText  id="email" value="#{personView.form.email}"/>
+            <br/>
+            <h:outputLabel for="birth" value="Nacimiento"/>
+            <h:inputText  id="birth" value="#{personView.form.birth}">
+                <f:converter converterId="com.apuntesdejava.LocalDateConverter" />
+            </h:inputText>
+            <br/>
+            <h:selectBooleanCheckbox id='enabled' value="#{personView.form.enabled}" />
+            <h:outputLabel for="enabled" value="Activo"/>
+            <br/>
+            <h:outputLabel for="interests" value="Intereses"/>
+            <h:selectManyCheckbox id="interests" value="#{personView.form.interests}" layout="pageDirection">
+                <f:selectItem itemLabel="Viajes" itemValue="V" />
+                <f:selectItem itemLabel="Comidas" itemValue="C" noSelectionOption="true"/>
+                <f:selectItem itemLabel="Entretenimiento" itemValue="E" />
+            </h:selectManyCheckbox>
+            <br/>
+            <h:selectManyListbox value="#{personView.form.aptitudes}">
+                <f:selectItem itemLabel="Java" itemValue="JAVA" />
+                <f:selectItem itemLabel="C" itemValue="C" />
+                <f:selectItem itemLabel="C++" itemValue="CPP" noSelectionOption="true" />
+            </h:selectManyListbox>
+            <h:selectOneListbox value="#{personView.form.language}">
+                <f:selectItems value="#{personView.languages}" var="l" itemLabel="#{l.language}" itemValue="#{l.code}" />
+            </h:selectOneListbox>
+            <h:commandButton action="#{personView.save}" value="Guardar" />
+        </h:form>
+    </h:body>
+</html>
+
